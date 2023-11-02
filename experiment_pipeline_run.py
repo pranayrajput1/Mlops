@@ -23,7 +23,7 @@ def run_pipeline_job(
     pipeline_job = aiplatform.PipelineJob(
         project=PROJECT_ID,
         location=REGION,
-        display_name=PIPELINE_NAME,
+        display_name=EXPERIMENT_PIPELINE_NAME,
         template_path=pipeline_template_name,
         parameter_values=params,
         job_id=job_id,
