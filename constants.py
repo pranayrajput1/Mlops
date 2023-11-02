@@ -26,7 +26,7 @@ SERVING_IMAGE = f"{REGION}-docker.pkg.dev/{PROJECT_ID}/clustering-pipeline/{SERV
 STAGING_BUCKET = "gs://dbscan-model/"
 BATCH_SIZE = 10000
 
-TRIGGER_ID = "cd44e5f1-3fa4-4987-8b89-2fea43b4072a"
+TRIGGER_ID = "7ac634d9-8b3e-4ba3-8afa-fbff056388ad"
 
 dataset_bucket = "nashtech_vertex_ai_artifact"
 dataset_name = "household_power_consumption.txt"
@@ -45,8 +45,3 @@ models_list = ["db_scan", "k_means"]
 
 # PIPELINE_IMAGE = "us-central1-docker.pkg.dev/nashtech-ai-dev-389315/clustering-pipeline/db-scan-image:0.0.1"
 # SERVING_IMAGE = "us-central1-docker.pkg.dev/nashtech-ai-dev-389315/clustering-pipeline/dbscan-serve-image:0.0.1"
-
-pipeline = "7c74cb60-8a30-44b3-a5cf-3637962ce85a"
-
-"https://www.hardware-corner.net/guides/computer-to-run-llama-ai-model/"
-"gcloud functions deploy metrics_generator --gen2 --runtime=python311 --region=us-central1 --source=. --entry-point=generate_matrix --trigger-http --service-account=nashtech-ai-dev-app-sa@nashtech-ai-dev-389315.iam.gserviceaccount.com"
