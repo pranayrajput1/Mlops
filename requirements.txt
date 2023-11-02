@@ -8,7 +8,7 @@ setuptools~=68.2.0
 numpy==1.23.5
 pandas==2.0.2
 joblib==1.2.0
-Flask==2.3.2
+Flask~=2.3.3
 
 gcsfs==2023.3.0
 scikit-learn==1.2.2
@@ -33,3 +33,4 @@ google==3.0.0
 urllib3==1.26.15
 
 scipy~=1.10.1
+functions_framework==3.4.0

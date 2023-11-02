@@ -9,6 +9,7 @@ SERVICE_ACCOUNT_ML = "nashtech-ai-dev-app-sa@nashtech-ai-dev-389315.iam.gservice
 MODEL_DISPLAY_NAME = "db_scan_model"
 
 PIPELINE_NAME = "clustering-kubeflow"
+EXPERIMENT_PIPELINE_NAME = "experiment-pipeline"
 PIPELINE_DESCRIPTION = "Kubeflow pipeline tutorial."
 
 PIPELINE_ROOT_GCS = f"gs://{PROJECT_ID}-kubeflow-pipeline"

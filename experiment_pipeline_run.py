@@ -1,7 +1,7 @@
 from google.cloud import aiplatform
 from datetime import datetime
 import os
-from constants import PIPELINE_NAME, PROJECT_ID, REGION, SERVICE_ACCOUNT_ML, experiment_pipeline, dataset_bucket
+from constants import EXPERIMENT_PIPELINE_NAME, PROJECT_ID, REGION, SERVICE_ACCOUNT_ML, experiment_pipeline, dataset_bucket
 
 
 def run_pipeline_job(
@@ -10,8 +10,8 @@ def run_pipeline_job(
         cleanup_compiled_pipeline: bool = False,
         enable_caching: bool = False,
 ) -> aiplatform.PipelineJob:
-    job_id = f'{PIPELINE_NAME}-{datetime.now().strftime("%Y%m%d%H%M%S")}'
-    experiment_name = f'{PIPELINE_NAME}-experiments'
+    job_id = f'{EXPERIMENT_PIPELINE_NAME}-{datetime.now().strftime("%Y%m%d%H%M%S")}'
+    experiment_name = f'{EXPERIMENT_PIPELINE_NAME}-experiments'
 
     params = dict(
         project_id=PROJECT_ID,

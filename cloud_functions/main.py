@@ -7,6 +7,7 @@ from flask import make_response
 import pandas as pd
 import logging
 import datetime
+import pytz
 
 logger = logging.getLogger('tipper')
 logger.setLevel(logging.DEBUG)
@@ -17,6 +18,8 @@ def get_time():
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M")
     datetime_obj = pd.to_datetime(formatted_time)
+    ist_timezone = pytz.timezone('Asia/Kolkata')  # IST timezone
+    datetime_obj = datetime_obj.replace(tzinfo=ist_timezone)
     return datetime_obj
 
 
@@ -91,10 +94,10 @@ def get_stats(dataframe):
         "IQR_INTENSITY": quartiles_intensity[2] - quartiles_intensity[0],
         "IQR_REACTIVE_POWER": quartiles_reactive_power[2] - quartiles_reactive_power[0],
         "SKEW_INTENSITY": stats.skew(global_intensity),
-        "skew_reactive_power": stats.skew(global_reactive_power),
-        "kurtosis_intensity": stats.kurtosis(global_intensity),
-        "kurtosis_reactive_power": stats.kurtosis(global_reactive_power),
-        "date_time": timestamp
+        "SKEW_REACTIVE_POWER": stats.skew(global_reactive_power),
+        "KURTOSIS_INTENSITY": stats.kurtosis(global_intensity),
+        "KURTOSIS_REACTIVE_POWER": stats.kurtosis(global_reactive_power),
+        "DATE_TIME": timestamp
     }
 
     stats_df = pd.DataFrame([generated_stats_dict])
@@ -122,13 +125,13 @@ def write_table_to_bigquery(dataframe, project_id, big_query_table_id):
             bigquery.SchemaField("IQR_INTENSITY", bigquery.enums.SqlTypeNames.FLOAT),
             bigquery.SchemaField("IQR_REACTIVE_POWER", bigquery.enums.SqlTypeNames.FLOAT),
             bigquery.SchemaField("SKEW_INTENSITY", bigquery.enums.SqlTypeNames.FLOAT),
-            bigquery.SchemaField("skew_reactive_power", bigquery.enums.SqlTypeNames.FLOAT),
-            bigquery.SchemaField("kurtosis_intensity", bigquery.enums.SqlTypeNames.FLOAT),
-            bigquery.SchemaField("kurtosis_reactive_power", bigquery.enums.SqlTypeNames.FLOAT),
-            bigquery.SchemaField("date_time", bigquery.enums.SqlTypeNames.DATETIME),
+            bigquery.SchemaField("SKEW_REACTIVE_POWER", bigquery.enums.SqlTypeNames.FLOAT),
+            bigquery.SchemaField("KURTOSIS_INTENSITY", bigquery.enums.SqlTypeNames.FLOAT),
+            bigquery.SchemaField("KURTOSIS_REACTIVE_POWER", bigquery.enums.SqlTypeNames.FLOAT),
+            bigquery.SchemaField("DATE_TIME", bigquery.enums.SqlTypeNames.DATETIME),
         ]
 
-        dataframe["cnf_matrix"] = dataframe["cnf_matrix"].astype(str)
+        dataframe["CNF_MATRIX"] = dataframe["CNF_MATRIX"].astype(str)
 
         job_config = bigquery.LoadJobConfig(
             schema=schema,
@@ -201,4 +204,3 @@ def generate_matrix(request):
 
     except Exception as e:
         return make_response(f"Error: {str(e)}", 500)
-

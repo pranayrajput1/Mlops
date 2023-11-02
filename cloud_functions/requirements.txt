@@ -4,3 +4,4 @@ scikit-learn
 numpy
 scipy
 pandas
+pytz==2023.3.post1
